@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author andy
+ * @email andyworkbase@gmail.com
+ * @team MageCloud
+ * @package MageCloud_Faq
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageCloud_Faq::faq"
+             title="FAQ"
+             translate="title"
+             module="MageCloud_Faq"
+             sortOrder="10"
+             parent="Magento_Backend::content"
+             resource="MageCloud_Faq::faq"/>
+        <add id="MageCloud_Faq::manage"
+             title="Manage FAQ"
+             translate="title"
+             module="MageCloud_Faq"
+             sortOrder="20"
+             parent="MageCloud_Faq::faq"
+             action="magecloudFaq/faq"
+             resource="MageCloud_Faq::faq"/>
+        <add id="MageCloud_Faq::config"
+             title="Configuration"
+             translate="title"
+             module="MageCloud_Faq"
+             sortOrder="30"
+             parent="MageCloud_Faq::faq"
+             action="downloadable/system_config/edit/section/magecloud_faq/"
+             resource="MageCloud_Faq::config"/>
+    </menu>
+</config>

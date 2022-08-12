@@ -1,0 +1,41 @@
+<?php
+/**
+ * @author andy
+ * @email andyworkbase@gmail.com
+ * @team MageCloud
+ * @package MageCloud_Faq
+ */
+?>
+<?php
+/**
+ * Category view FAQ template
+ *
+ * @var $block \MageCloud\Faq\Block\Category\Faq
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<?php
+/** @var MageCloud\Faq\ViewModel\Category\Faq $viewModel */
+$viewModel = $block->getData('viewModel');
+$faqCollection = $viewModel->getFaqCollection();
+$isActive = $viewModel->isEnabled() && $faqCollection->getSize();
+?>
+<?php if ($isActive): ?>
+    <div class="category-faq-wrapper">
+        <h3>
+            <strong><?= $block->escapeHtml(__($viewModel->getTitle())); ?></strong>
+        </h3>
+        <div class="category-faq-items">
+            <?php /** @var MageCloud\Faq\Model\Faq $item */?>
+            <?php foreach ($faqCollection as $item): ?>
+                <div class="category-faq-item" data-mage-init='{"collapsible":{"openedState": "active", "saveState": false}}'>
+                    <div data-role="title" class="item-title">
+                        <span><?= $block->escapeHtml(__($item->getTitle())); ?></span>
+                    </div>
+                    <div data-role="content" class="item-content"><?= /* @noEscape */ __($item->getContent())?></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+     <?= $viewModel->getSchema(); ?>
+<?php endif; ?>

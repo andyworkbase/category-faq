@@ -1,0 +1,15 @@
+<?php
+/**
+ * @author andy
+ * @email andyworkbase@gmail.com
+ * @team MageCloud
+ * @package MageCloud_Faq
+ */
+
+/** @var \MageCloud\Faq\Block\Adminhtml\Category\AssignFaqs $block */
+/** @var \MageCloud\Faq\Block\Adminhtml\Category\Tab\Faq $blockGrid */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+
+$blockGrid = $block->getBlockGrid();
+?>
+<?= $block->getGridHtml() ?>

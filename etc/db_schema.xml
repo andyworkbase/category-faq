@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author andy
+ * @email andyworkbase@gmail.com
+ * @team MageCloud
+ * @package MageCloud_Faq
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magecloud_faq" resource="default" engine="innodb" comment="MageCloud FAQ Table">
+        <column xsi:type="smallint" name="faq_id" unsigned="false" nullable="false" identity="true"
+                comment="FAQ ID"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="FAQ Title"/>
+        <column xsi:type="mediumtext" name="content" nullable="true" comment="FAQ Content"/>
+        <column xsi:type="timestamp" name="creation_time" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="FAQ Creation Time"/>
+        <column xsi:type="timestamp" name="update_time" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="FAQ Modification Time"/>
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is FAQ Active"/>
+        <column xsi:type="smallint" name="sort_order" unsigned="false" nullable="true" identity="false"
+                comment="Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="faq_id"/>
+        </constraint>
+        <index referenceId="MAGECLOUD_FAQ_TITLE_CONTENT" indexType="fulltext">
+            <column name="title"/>
+            <column name="content"/>
+        </index>
+    </table>
+    <table name="magecloud_faq_store" resource="default" engine="innodb" comment="MageCloud FAQ To Store Linkage Table">
+        <column xsi:type="smallint" name="faq_id" unsigned="false" nullable="false" identity="false"
+                comment="FAQ ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false"
+                comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="faq_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGECLOUD_FAQ_STORE_FAQ_ID_MAGECLOUD_FAQ_FAQ_ID" table="magecloud_faq_store"
+                    column="faq_id" referenceTable="magecloud_faq" referenceColumn="faq_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGECLOUD_FAQ_STORE_STORE_ID_STORE_STORE_ID" table="magecloud_faq_store"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <index referenceId="MAGECLOUD_FAQ_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="magecloud_faq_catalog_category" resource="default" engine="innodb"
+           comment="MageCloud FAQ To Catalog Category Linkage Table">
+        <column xsi:type="smallint" name="faq_id" unsigned="false" nullable="false" identity="false"
+                comment="FAQ ID"/>
+        <column xsi:type="int" name="category_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Category ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="faq_id"/>
+            <column name="category_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MAGECLOUD_FAQ_CATALOG_CATEGORY_FAQ_ID_MAGECLOUD_FAQ_FAQ_ID"
+                    table="magecloud_faq_catalog_category" column="faq_id" referenceTable="magecloud_faq"
+                    referenceColumn="faq_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MAGECLOUD_FAQ_CAT_CTGR_CTGR_ID_CAT_CTGR_ENTT_ENTT_ID"
+                    table="magecloud_faq_catalog_category" column="category_id" referenceTable="catalog_category_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="MAGECLOUD_FAQ_CATALOG_CATEGORY_CATEGORY_ID" indexType="btree">
+            <column name="category_id"/>
+        </index>
+    </table>
+</schema>

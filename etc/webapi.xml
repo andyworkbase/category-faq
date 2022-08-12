@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author andy
+ * @email andyworkbase@gmail.com
+ * @team MageCloud
+ * @package MageCloud_Faq
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- FAQ -->
+    <route url="/V1/magecloudFaq/:faqId" method="GET">
+        <service class="MageCloud\Faq\Api\FaqRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="MageCloud_Faq::faq"/>
+        </resources>
+    </route>
+    <route url="/V1/magecloudFaq/search" method="GET">
+        <service class="MageCloud\Faq\Api\FaqRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="MageCloud_Faq::faq"/>
+        </resources>
+    </route>
+    <route url="/V1/magecloudFaq" method="POST">
+        <service class="MageCloud\Faq\Api\FaqRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="MageCloud_Faq::faq"/>
+        </resources>
+    </route>
+    <route url="/V1/magecloudFaq/:id" method="PUT">
+        <service class="MageCloud\Faq\Api\FaqRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="MageCloud_Faq::faq"/>
+        </resources>
+    </route>
+    <route url="/V1/magecloudFaq/:faqId" method="DELETE">
+        <service class="MageCloud\Faq\Api\FaqRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="MageCloud_Faq::faq"/>
+        </resources>
+    </route>
+</routes>
